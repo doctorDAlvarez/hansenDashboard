@@ -1,32 +1,62 @@
-.App {
+.login {
+  width: 400px;
+  height: 300px;
   margin: auto;
-  margin-top: 10%;
-  width: 60vw;
-  height: fit-content;
   text-align: center;
-  background-color: rgb(212, 235, 250);
-  font-family:'Courier New', Courier, monospace;
+  margin-top: 30%;
+  background-color: aqua;
   border-radius: 10px;
-  box-shadow: 0 0 10px 3px rgb(160, 181, 209);
+  box-shadow: 0 0 4px 3px cornflowerblue;
 }
-.data-loader {
-  height: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+.login [data-reach-tab][aria-selected="true"],
+.login [data-reach-tab].active {
+  background: cyan;
 }
-label {
-  margin-top: 20px;
-  color:rgb(36, 67, 107);
-  font-size: larger;
-  font-style: italic;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+.login [data-reach-tab].disabled {
+  opacity: 0.25;
+}
+button {
+  margin: auto;
+  position: relative;
+  width: 50%;
+  height: 50px;
+  border: transparent;
+  border-radius: 10px 10px 5px 5px;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: large;
+  font-weight: bold;
+  color: rgb(69, 94, 119);
+  
+}
+button:hover {
+  background-color: aliceblue;
+}
+
+
+form.login-form {
+  display: flex;
+  margin: auto;
+  margin-top: 30px;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
 input {
-  margin: 10px;
-  height: 30px;
+  margin-top: 10px;
   border: transparent;
-  border-radius: 10px;
+  height: 30px;
+  box-shadow: 0 0 3px 1px gainsboro;
+  border-radius: 6px;
+  text-align: center;
+}
+input:focus{
+  outline: none;
+  box-shadow: 0 0 5px 2px rgb(148, 132, 132);
+  
 }
 
-
+label {
+  padding: 10px;
+}
