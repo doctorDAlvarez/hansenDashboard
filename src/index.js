@@ -1,17 +1,110 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+/** @jsx jsx */
+import { jsx } from "@emotion/react";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import "bootstrap/dist/css/bootstrap-reboot.css";
+import "@reach/dialog/styles.css";
+import * as React from "react";
+import ReactDOM from "react-dom";
+import { Button, Input, FormGroup } from "./lib/lib";
+import { Modal, ModalContents, ModalOpenButton } from "./modal";
+import logo from "./assets/cashier.svg";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+function LoginForm({ onSubmit, submitButton }) {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const { username, password } = event.target.elements;
+
+    onSubmit({
+      username: username.value,
+      password: password.value,
+    });
+  }
+  return (
+    <form
+      css={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "stretch",
+        "> div": {
+          margin: "10px auto",
+          width: "100%",
+          maxWidth: "300px",
+        },
+      }}
+      onSubmit={handleSubmit}
+    >
+      <FormGroup>
+        <label htmlFor="username"></label>
+        <Input id="username" placeholder="username" autoComplete="off" />
+      </FormGroup>
+      <FormGroup>
+        <label htmlFor="password"></label>
+        <Input id="password" type="password" placeholder="password" />
+      </FormGroup>
+      <div>{React.cloneElement(submitButton, { type: "submit" })}</div>
+    </form>
+  );
+}
+
+function App() {
+  function login(formData) {
+    console.log("login", formData);
+  }
+
+  function register(formData) {
+    console.log("register", formData);
+  }
+  return (
+    <div
+      css={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100vh",
+      }}
+    >
+      <img src={logo} alt="logo" width="80px" height="80px" />
+      <h1
+        css={{
+          color: "gray",
+        }}
+      >
+        Hansen Cashier
+      </h1>
+      <div
+        css={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+          gridGap: "0.75rem",
+        }}
+      >
+        <Modal>
+          <ModalOpenButton>
+            <Button variant="primary">Login</Button>
+          </ModalOpenButton>
+          <ModalContents aria-label="Login form" title="Login">
+            <LoginForm
+              onSubmit={login}
+              submitButton={<Button variant="primary">Login</Button>}
+            />
+          </ModalContents>
+        </Modal>
+        <Modal>
+          <ModalOpenButton>
+            <Button variant="secondary">Register</Button>
+          </ModalOpenButton>
+          <ModalContents aria-label="Registration form" title="Register">
+            <LoginForm
+              onSubmit={register}
+              submitButton={<Button variant="secondary">Register</Button>}
+            />
+          </ModalContents>
+        </Modal>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
